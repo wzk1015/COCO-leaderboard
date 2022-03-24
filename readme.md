@@ -1,3 +1,9 @@
+# COCO Leaderboard
+
+Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-coco), 2022.3.22
+
+
+
 [TOC]
 
 
@@ -15,13 +21,13 @@
 | 3    | Florence          | 62.4   | FLOD9M (COCO, O365, LVIS, OpenImages) | FLD900M            | SwinH           | DyHead                    | *multimodal, multi-task*              | multi  |
 | 4    | GLIP              | 61.5   | FourODs, GoldG+                       | 27M grounding data | SwinL           | DyHead                    | *object-word contrastive pretraining* | multi  |
 | 5    | Soft Teacher      | 61.3   | Object365                             | IN22K              | SwinL           | HTC++                     | *semi-supervised*                     | multi  |
-| 6    | DyHead            | 60.6   | self-training                         |                    | SwinL           | *DyHead* (DETR)           |                                       | multi  |
+| 6    | DyHead            | 60.6   | self-training                         | IN22K              | SwinL           | *DyHead* (Mask RCNN)      |                                       | multi  |
 | 7    | CBNetV2           | 60.1   |                                       |                    | SwinL           | HTC                       |                                       | multi  |
 | 8    | Focal Transformer | 58.9   |                                       |                    | SwinL           | DyHead                    |                                       | multi  |
 | 9    | YOLOR             | 57.3   |                                       |                    | CSP             | *YOLOR* (YOLOv4)          |                                       | single |
 | 10   | CopyPaste         | 57.3   |                                       |                    | EfficientNet    | FPN                       | *data augmentation*                   | single |
 | 11   | SOLQ              | 56.5   |                                       |                    | SwinL           | *SOLQ*                    |                                       | single |
-| 12   | CenterNet2        | 56.4   |                                       |                    | Res2Net101-DCN  | *CenterNet2*              |                                       | single |
+| 12   | CenterNet2        | 56.4   |                                       |                    | Res2Net101-DCN  | *CenterNet2*              | *anchor free*                         | single |
 | 13   | QueryInst         | 56.1   |                                       |                    | ResNet101       | *QueryInst*               |                                       | single |
 | 14   | Scaled YOLOv4     | 55.8   |                                       |                    | CSP             | YOLOv4                    | *network scaling approach*            | single |
 | 15   | DetectoRS         | 55.7   |                                       |                    | ResNeXt101      | *DetectoRS*               |                                       | multi  |
@@ -34,7 +40,7 @@
 | 22   | ResNeSt           | 53.3   |                                       |                    | *ResNeSt-200*   | Cascade-RCNN              |                                       | multi  |
 | 23   | GFLv2             | 53.3   |                                       |                    | Res2Net-101-DCN | *Generalized Focal Loss*  | *loss function*                       | multi  |
 | 24   | RelationNet++     | 52.7   |                                       |                    | ResNeXt-101-DCN | *RelationNet++*           |                                       | multi  |
-| 25√  | Deformable DETR   | 52.3   |                                       |                    | ResNeXt-101-DCN | *Deformable DETR* (DETR)  |                                       | multi  |
+| 25   | Deformable DETR   | 52.3   |                                       |                    | ResNeXt-101-DCN | *Deformable DETR* (DETR)  |                                       | multi  |
 
 ### Related Papers
 
@@ -136,6 +142,28 @@ Swin V1的问题：
 cls伪标签：采用soft teacher，使用teacher模型的分类分数来加权student模型预测proposal的loss。低阈值+soft teacher的效果好于高阈值
 
 reg伪标签：采用box jittering，多次抖动伪前景框proposal，利用teacher模型进行回归，将回归框的方差用作可靠性度量，高可靠性（方差低）的proposal用于student定位分支的训练
+
+
+
+### 6. Dynamic Head
+
+<img src="readme.assets/image-20220324142014840.png" alt="image-20220324142014840" style="zoom:50%;" />
+
+在一个head里同时实现三种感知。对feature pyramid连续进行三种attention操作，分别针对scale, spatial和task，即layer, space(H,W), channel三个维度
+
+dynamic head模块可以添加到one-stage和two-stage检测器中，one-stage中放在FPN backbone后、class box center的分类器前，two-stage中将最后一个task-aware attention放在ROI Pooling后、class box分类器前，其余的放在ROI Pooling前
+
+
+
+### 7. CBNetV2
+
+<img src="readme.assets/image-20220324150214078.png" alt="image-20220324150214078" style="zoom:50%;" />
+
+将多个相同结构Backbone使用Dense Higher-Level Composition的方式组合在一起，每个layer给所有更浅layer提供输入
+
+为了避免深度带来的训练困难，在训练时使用assisting backbone（前K-1个backbone中的每个）的输出训练同样权重的detection head2，loss作为assistant supervision
+
+
 
 
 
