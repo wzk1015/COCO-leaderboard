@@ -24,12 +24,12 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 | 6    | DyHead            | 60.6   | IN22K self-training                                        | IN22K                       | SwinL               | *DyHead* (Mask RCNN)      |                                       | multi  |
 | 7    | CBNetV2           | 60.1   |                                                            | IN22K                       | SwinL               | HTC                       | *composite backbone*                  | multi  |
 | 8    | Focal Transformer | 58.9   |                                                            | Swin init, finetune on IN1K | *Focal Transformer* | DyHead                    |                                       | multi  |
-| 9    | YOLOR             | 57.3   |                                                            |                             | CSP                 | *YOLOR* (YOLOv4)          |                                       | single |
+| 9    | YOLOR             | 57.3   |                                                            | IN1K                        | CSPDarkNet53        | *YOLOR* (YOLOv4-CSP)      |                                       | single |
 | 10   | CopyPaste         | 57.3   |                                                            |                             | EfficientNet        | FPN                       | *data augmentation*                   | single |
 | 11   | SOLQ              | 56.5   |                                                            |                             | SwinL               | *SOLQ*                    |                                       | single |
 | 12   | CenterNet2        | 56.4   |                                                            |                             | Res2Net101-DCN      | *CenterNet2*              | *anchor free*                         | single |
 | 13   | QueryInst         | 56.1   |                                                            |                             | ResNet101           | *QueryInst*               |                                       | single |
-| 14   | Scaled YOLOv4     | 55.8   |                                                            |                             | CSP                 | YOLOv4                    | *network scaling approach*            | single |
+| 14   | Scaled YOLOv4     | 55.8   |                                                            |                             | CSPDarkNet53        | YOLOv4                    | *network scaling approach*            | single |
 | 15   | DetectoRS         | 55.7   |                                                            |                             | ResNeXt101          | *DetectoRS*               |                                       | multi  |
 | 16   | Mish              | 55.2   |                                                            |                             | CSP                 | YOLOv4                    | *activation Function*                 | multi  |
 | 17   | Self-training     | 54.3   | self-training                                              |                             | SpineNet            | RetinaNet                 | *self-training*                       | single |
@@ -48,12 +48,11 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 
 1. HTC++
 2. CSPNet
-3. EfficientNet
-4. Res2Net
-5. SpineNet
-6. ResNeXt
-7. ResNeSt
-8. ATSS
+3. Res2Net
+4. SpineNet
+5. ResNeXt
+6. ResNeSt
+7. ATSS
 
 * Done
 
@@ -76,6 +75,7 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 17. CenterNet
 18. Swin Transformer
 19. CLIP
+20. EfficientNet
 
 
 
@@ -195,3 +195,26 @@ dynamic head模块可以添加到one-stage和two-stage检测器中，one-stage�
 
 但显存占用和计算量较大，对高分辨率的预测任务不友好
 
+
+
+### 9. YOLOR
+
+![image-20220325222448340](readme.assets/image-20220325222448340.png)
+
+提出了一个统一的网络来同时编码显式知识和隐式知识，在网络中执行了核空间对齐、预测细化和多任务学习来学习隐式知识，同时对多个任务形成统一的表示
+
+隐式知识：
+
+1. 利用投影向量的内积和隐式表示来达到降低流形空间维度的目的
+2. 对输出特征和隐式表征进行加法和乘法运算，这样就可以对核空间进行变换、旋转和缩放，以对齐神经网络的每个输出核空间
+3. 引入加法，预测中心坐标的偏移；引入乘法，搜索锚框的超参数集；分别使用点乘和concat来执行多任务特征选择
+
+传统神经网络的表示空间专注于特定任务，对于其他任务不变。通用的网络希望对于所有潜在任务都有效。
+
+特征对齐：在FPN的每一个特征映射层添加隐式知识进行特征对齐
+
+目标检测预测细化：在YOLO的每一个输出层添加隐式知识进行预测细化
+
+为训练多任务训练一个规范的表征，通过给每个任务分支引入隐式表征增强表征能力
+
+总结：引入隐式知识，仅增加不到万分一的参数量和计算量，模型性能得到有意义的提升，同时收敛更快。
