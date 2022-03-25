@@ -14,46 +14,68 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 
 *Italic* denotes unique contribution
 
-| Rank | Method            | AP box | Extra Data (Detection)                | Pretrain Data      | Backbone        | Model                     | Training                              | Scale  |
-| ---- | ----------------- | ------ | ------------------------------------- | ------------------ | --------------- | ------------------------- | ------------------------------------- | ------ |
-| 1    | DINO              | 63.3   | Object365                             | IN22K              | SwinL           | *DINO* (DETR)             |                                       | multi  |
-| 2    | SwinV2            | 63.1   | Object365                             | IN22K-ext-70M      | *SwinG*         | HTC++                     |                                       | multi  |
-| 3    | Florence          | 62.4   | FLOD9M (COCO, O365, LVIS, OpenImages) | FLD900M            | SwinH           | DyHead                    | *multimodal, multi-task*              | multi  |
-| 4    | GLIP              | 61.5   | FourODs, GoldG+                       | 27M grounding data | SwinL           | DyHead                    | *object-word contrastive pretraining* | multi  |
-| 5    | Soft Teacher      | 61.3   | Object365                             | IN22K              | SwinL           | HTC++                     | *semi-supervised*                     | multi  |
-| 6    | DyHead            | 60.6   | self-training                         | IN22K              | SwinL           | *DyHead* (Mask RCNN)      |                                       | multi  |
-| 7    | CBNetV2           | 60.1   |                                       |                    | SwinL           | HTC                       |                                       | multi  |
-| 8    | Focal Transformer | 58.9   |                                       |                    | SwinL           | DyHead                    |                                       | multi  |
-| 9    | YOLOR             | 57.3   |                                       |                    | CSP             | *YOLOR* (YOLOv4)          |                                       | single |
-| 10   | CopyPaste         | 57.3   |                                       |                    | EfficientNet    | FPN                       | *data augmentation*                   | single |
-| 11   | SOLQ              | 56.5   |                                       |                    | SwinL           | *SOLQ*                    |                                       | single |
-| 12   | CenterNet2        | 56.4   |                                       |                    | Res2Net101-DCN  | *CenterNet2*              | *anchor free*                         | single |
-| 13   | QueryInst         | 56.1   |                                       |                    | ResNet101       | *QueryInst*               |                                       | single |
-| 14   | Scaled YOLOv4     | 55.8   |                                       |                    | CSP             | YOLOv4                    | *network scaling approach*            | single |
-| 15   | DetectoRS         | 55.7   |                                       |                    | ResNeXt101      | *DetectoRS*               |                                       | multi  |
-| 16   | Mish              | 55.2   |                                       |                    | CSP             | YOLOv4                    | *activation Function*                 | multi  |
-| 17   | Self-training     | 54.3   | self-training                         |                    | SpineNet        | RetinaNet                 | *self-training*                       | single |
-| 18   | USB               | 54.1   |                                       |                    | Res2Net101-DCN  | *UniverseNet* (RetinaNet) |                                       | multi  |
-| 19   | EfficientDet      | 53.7   |                                       |                    | EfficientNet    | *EfficientDet* (BiFPN)    |                                       | single |
-| 20   | PAA               | 53.5   |                                       |                    | ResNeXt-152-DCN | *PAA* (RetinaNet)         | *anchor assignment*                   | multi  |
-| 21   | LSNet             | 53.5   |                                       |                    | Res2Net-101-DCN | *LSNet*                   |                                       | multi  |
-| 22   | ResNeSt           | 53.3   |                                       |                    | *ResNeSt-200*   | Cascade-RCNN              |                                       | multi  |
-| 23   | GFLv2             | 53.3   |                                       |                    | Res2Net-101-DCN | *Generalized Focal Loss*  | *loss function*                       | multi  |
-| 24   | RelationNet++     | 52.7   |                                       |                    | ResNeXt-101-DCN | *RelationNet++*           |                                       | multi  |
-| 25   | Deformable DETR   | 52.3   |                                       |                    | ResNeXt-101-DCN | *Deformable DETR* (DETR)  |                                       | multi  |
+| Rank | Method            | AP box | Extra Data (Detection)                                     | Pretrain Data               | Backbone            | Model                     | Training                              | Scale  |
+| ---- | ----------------- | ------ | ---------------------------------------------------------- | --------------------------- | ------------------- | ------------------------- | ------------------------------------- | ------ |
+| 1    | DINO              | 63.3   | Object365                                                  | IN22K                       | SwinL               | *DINO* (DETR)             |                                       | multi  |
+| 2    | SwinV2            | 63.1   | Object365                                                  | IN22K-ext-70M               | *SwinG*             | HTC++                     |                                       | multi  |
+| 3    | Florence          | 62.4   | FLOD9M (COCO, O365, LVIS, OpenImages), IN22K self-training | FLD900M                     | SwinH               | DyHead                    | *multimodal, multi-task*              | multi  |
+| 4    | GLIP              | 61.5   | FourODs, GoldG+                                            | 27M grounding data          | SwinL               | DyHead                    | *object-word contrastive pretraining* | multi  |
+| 5    | Soft Teacher      | 61.3   | Object365                                                  | IN22K                       | SwinL               | HTC++                     | *semi-supervised*                     | multi  |
+| 6    | DyHead            | 60.6   | IN22K self-training                                        | IN22K                       | SwinL               | *DyHead* (Mask RCNN)      |                                       | multi  |
+| 7    | CBNetV2           | 60.1   |                                                            | IN22K                       | SwinL               | HTC                       | *composite backbone*                  | multi  |
+| 8    | Focal Transformer | 58.9   |                                                            | Swin init, finetune on IN1K | *Focal Transformer* | DyHead                    |                                       | multi  |
+| 9    | YOLOR             | 57.3   |                                                            |                             | CSP                 | *YOLOR* (YOLOv4)          |                                       | single |
+| 10   | CopyPaste         | 57.3   |                                                            |                             | EfficientNet        | FPN                       | *data augmentation*                   | single |
+| 11   | SOLQ              | 56.5   |                                                            |                             | SwinL               | *SOLQ*                    |                                       | single |
+| 12   | CenterNet2        | 56.4   |                                                            |                             | Res2Net101-DCN      | *CenterNet2*              | *anchor free*                         | single |
+| 13   | QueryInst         | 56.1   |                                                            |                             | ResNet101           | *QueryInst*               |                                       | single |
+| 14   | Scaled YOLOv4     | 55.8   |                                                            |                             | CSP                 | YOLOv4                    | *network scaling approach*            | single |
+| 15   | DetectoRS         | 55.7   |                                                            |                             | ResNeXt101          | *DetectoRS*               |                                       | multi  |
+| 16   | Mish              | 55.2   |                                                            |                             | CSP                 | YOLOv4                    | *activation Function*                 | multi  |
+| 17   | Self-training     | 54.3   | self-training                                              |                             | SpineNet            | RetinaNet                 | *self-training*                       | single |
+| 18   | USB               | 54.1   |                                                            |                             | Res2Net101-DCN      | *UniverseNet* (RetinaNet) |                                       | multi  |
+| 19   | EfficientDet      | 53.7   |                                                            |                             | EfficientNet        | *EfficientDet* (BiFPN)    |                                       | single |
+| 20   | PAA               | 53.5   |                                                            |                             | ResNeXt-152-DCN     | *PAA* (RetinaNet)         | *anchor assignment*                   | multi  |
+| 21   | LSNet             | 53.5   |                                                            |                             | Res2Net-101-DCN     | *LSNet*                   |                                       | multi  |
+| 22   | ResNeSt           | 53.3   |                                                            |                             | *ResNeSt-200*       | Cascade-RCNN              |                                       | multi  |
+| 23   | GFLv2             | 53.3   |                                                            |                             | Res2Net-101-DCN     | *Generalized Focal Loss*  | *loss function*                       | multi  |
+| 24   | RelationNet++     | 52.7   |                                                            |                             | ResNeXt-101-DCN     | *RelationNet++*           |                                       | multi  |
+| 25   | Deformable DETR   | 52.3   |                                                            |                             | ResNeXt-101-DCN     | *Deformable DETR* (DETR)  |                                       | multi  |
 
 ### Related Papers
 
-1. DN-DETR
-2. DAB-DETR
-3. HTC
-4. HTC++
-5. SimMIM
-5. STAC
-5. FixMatch
-5. Focal Loss
+* TODO
 
+1. HTC++
+2. CSPNet
+3. EfficientNet
+4. Res2Net
+5. SpineNet
+6. ResNeXt
+7. ResNeSt
+8. ATSS
 
+* Done
+
+1. ResNet
+2. RCNN
+3. Fast RCNN
+4. Faster RCNN
+5. Mask RCNN
+6. FPN
+7. Focal Loss (RetinaNet)
+8. YOLOv4
+9. DETR
+10. Deformable Conv
+11. SimMIM
+12. DN-DETR
+13. DAB-DETR
+14. HTC
+15. STAC
+16. FixMatch
+17. CenterNet
+18. Swin Transformer
+19. CLIP
 
 
 
@@ -165,9 +187,11 @@ dynamic head模块可以添加到one-stage和two-stage检测器中，one-stage�
 
 
 
+### 8. Focal Transformer
 
+![image-20220325212755763](readme.assets/image-20220325212755763.png)
 
+粗粒度导致sub-optimal，细粒度导致计算开销过大。以细粒度的方式关注离自己近的token，以粗粒度的方式关注离自己远的token。将较远的patch进行pooling聚合，增大感受野
 
-
-
+但显存占用和计算量较大，对高分辨率的预测任务不友好
 
