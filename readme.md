@@ -1,6 +1,8 @@
 # COCO Leaderboard
 
-Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-coco), 2022.3.22
+Notes of top entries of COCO learderboard based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-coco) (up to 2022.3.22, deduplicated)
+
+References: several zhihu articles (see my [collection list](https://www.zhihu.com/collection/792178490)) and CSDN blogs
 
 
 
@@ -14,7 +16,7 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 
 *Italic* denotes unique contribution
 
-| Rank | Method            | AP box | Extra Data (Detection)                                     | Pretrain Data                 | Backbone            | Model                     | Training                              | Scale  |
+| Rank | Method            | AP box | Extra Data (Detection)                                     | Pretrain Data                 | Backbone            | Detector                  | Training                              | Scale  |
 | ---- | ----------------- | ------ | ---------------------------------------------------------- | ----------------------------- | ------------------- | ------------------------- | ------------------------------------- | ------ |
 | 1    | DINO              | 63.3   | Object365                                                  | IN22K                         | SwinL               | *DINO* (DETR)             |                                       | multi  |
 | 2    | SwinV2            | 63.1   | Object365                                                  | IN22K-ext-70M                 | *SwinG*             | HTC++                     |                                       | multi  |
@@ -27,8 +29,8 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 | 9    | YOLOR             | 57.3   |                                                            | IN1K                          | CSPDarkNet53        | *YOLOR* (YOLOv4-CSP)      |                                       | single |
 | 10   | CopyPaste         | 57.3   | self-training (unlabeled COCO, O365)                       | IN (self-training checkpoint) | EfficientNet        | FPN                       | *data augmentation*                   | single |
 | 11   | SOLQ              | 56.5   |                                                            | IN22K                         | SwinL               | *SOLQ* (DETR)             |                                       | single |
-| 12   | CenterNet2        | 56.4   |                                                            |                               | Res2Net101-DCN      | *CenterNet2*              | *anchor free*                         | single |
-| 13   | QueryInst         | 56.1   |                                                            |                               | ResNet101           | *QueryInst*               |                                       | single |
+| 12   | CenterNet2        | 56.4   |                                                            | IN1K                          | Res2Net101-DCN      | *CenterNet2*              | *anchor free*                         | single |
+| 13   | QueryInst         | 56.1   |                                                            | IN22K                         | SwinL               | *QueryInst* (DETR)        |                                       | single |
 | 14   | Scaled YOLOv4     | 55.8   |                                                            |                               | CSPDarkNet53        | YOLOv4                    | *network scaling approach*            | single |
 | 15   | DetectoRS         | 55.7   |                                                            |                               | ResNeXt101          | *DetectoRS*               |                                       | multi  |
 | 16   | Mish              | 55.2   |                                                            |                               | CSP                 | YOLOv4                    | *activation Function*                 | multi  |
@@ -46,13 +48,9 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 
 * TODO
 
-1. HTC++
-2. CSPNet
-3. Res2Net
-4. SpineNet
-5. ResNeXt
-6. ResNeSt
-7. ATSS
+1. ATSS
+2. FCOS
+3. Sparse RCNN
 
 * Done
 
@@ -76,6 +74,9 @@ Based on [paperswithcode](https://paperswithcode.com/sota/object-detection-on-co
 18. Swin Transformer
 19. CLIP
 20. EfficientNet
+20. Res2Net
+20. ResNeXt
+20. CSPNet
 
 
 
@@ -240,3 +241,50 @@ baseline模型在LVIS 2020挑战赛获胜者的基础上提升3.6%
 <img src="readme.assets/image-20220328010758298.png" alt="image-20220328010758298" style="zoom:50%;" />
 
 在DETR上增加预测mask的head。其中主要贡献是UQR模块，将mask从二维feature map压缩编码到一维向量，从而可以用head预测。测试时将一维向量解码为mask。编解码方式有Sparse Coding, PCA, DCT
+
+
+
+### 12. CenterNet2
+
+<img src="readme.assets/image-20220328162837596.png" alt="image-20220328162837596" style="zoom:50%;" />
+
+one-stage检测器：依赖于单独分类和回归分支；类别很多时（如LVIS）速度不再比two-stage快
+
+two-stage 检测器：相对较弱的RPN，召回排名前1K的proposal，减慢了速度
+
+CenterNet2框架（概率两阶段模型）将一个强大的One-Stage Detector与后面的分类阶段集成在一起，在第1阶段使用更少、质量更高的预选框，以输出更高的准确性和更快的速度
+
+第1阶段预测class agnostic概率，第2阶段预测分类分数，进行相乘
+
+使用FPN将CenterNet升级到多尺度。然后一阶段使用CenterNet，二阶段使用Faster RCNN / Cascade RCNN
+
+
+
+### 13. QueryInst
+
+![image-20220328171331940](readme.assets/image-20220328171331940.png)
+
+构建有效的基于 Query 的端到端实例分割算法
+
+将DETR中的transformer block加入mask head，box和mask进行多阶段迭代优化，并将query作为输入
+
+对于Cascade Mask R-CNN和HTC，在统计意义上细化了不同阶段proposal的质量。对于每个阶段，训练样本的数量和分布都有很大的不同，在不同阶段中，每个单独的proposal没有明确的内在对应
+
+对于QueryInst，各个阶段之间的连接是通过query中固有的一一对应自然建立的这种方法消除了显式多阶段mask head连接和proposal分布不一致的问题
+
+
+
+### 14. Scaled YOLOv4
+
+<img src="readme.assets/image-20220328202340702.png" alt="image-20220328202340702" style="zoom:50%;" />
+
+提出了一种网络缩放方法，修改深度，宽度，分辨率，还可以修改网络的结构
+
+对yolov4进行了重新设计，提出了YOLOv4-CSP，然后基于onYOLOv4-CSP开发了scale - yolov4。新的架构可以有效地减少ResNet、ResNeXt和Darknet上的FLOPs，分别减少23.5%、46.7%和50.0%
+
+对于tiny模型，控制计算量、feature map尺寸、保持卷积后通道数相同、最小化卷积输入/输出
+
+对于large模型，更好地预测物体大小的能力基本上取决于特征向量的感受野
+
+
+
