@@ -31,8 +31,8 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 | 11   | SOLQ              | 56.5   |                                                            | IN22K                         | SwinL               | *SOLQ* (DETR)             |                                       | single |
 | 12   | CenterNet2        | 56.4   |                                                            | IN1K                          | Res2Net101-DCN      | *CenterNet2*              | *anchor free*                         | single |
 | 13   | QueryInst         | 56.1   |                                                            | IN22K                         | SwinL               | *QueryInst* (DETR)        |                                       | single |
-| 14   | Scaled YOLOv4     | 55.8   |                                                            |                               | CSPDarkNet53        | YOLOv4                    | *network scaling approach*            | single |
-| 15   | DetectoRS         | 55.7   |                                                            |                               | ResNeXt101          | *DetectoRS*               |                                       | multi  |
+| 14   | Scaled YOLOv4     | 55.8   |                                                            | IN1K                          | CSPDarkNet53        | *scaled YOLOv4* (YOLOv4)  | *network scaling approach*            | single |
+| 15   | DetectoRS         | 55.7   |                                                            | IN5K                          | ResNeXt101          | *DetectoRS*               |                                       | multi  |
 | 16   | Mish              | 55.2   |                                                            |                               | CSP                 | YOLOv4                    | *activation Function*                 | multi  |
 | 17   | Self-training     | 54.3   | self-training                                              |                               | SpineNet            | RetinaNet                 | *self-training*                       | single |
 | 18   | USB               | 54.1   |                                                            |                               | Res2Net101-DCN      | *UniverseNet* (RetinaNet) |                                       | multi  |
@@ -285,6 +285,16 @@ CenterNet2框架（概率两阶段模型）将一个强大的One-Stage Detector�
 对于tiny模型，控制计算量、feature map尺寸、保持卷积后通道数相同、最小化卷积输入/输出
 
 对于large模型，更好地预测物体大小的能力基本上取决于特征向量的感受野
+
+
+
+### 15. DetectoRS
+
+<img src="readme.assets/image-20220328204437930.png" alt="image-20220328204437930" style="zoom:50%;" />
+
+在宏观层面上，提出了Recursive Feature Pyramid，将FPN的额外反馈连接加入到自下而上的backbone层中。使用带有空洞卷积的空间金字塔池化（ASPP）模块来实现两个递归特征金字塔的级联连接。融合模块通过卷积层和Sigmoid运算来计算注意力图，然后将结果注意力图用于计算更新后的加权和
+
+在微观层面上提出Switchable Atrous Convolution，以不同的空洞率进行卷积，使用switch函数合并。将主干网络ResNet中的每个3x3卷积层都转换为SAC，从而在不同的空洞率之间实现对卷积计算的软切换
 
 
 
