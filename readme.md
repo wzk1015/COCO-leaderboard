@@ -32,14 +32,14 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 | 12   | CenterNet2        | 56.4   |                                                            | IN1K                             | Res2Net101-DCN      | *CenterNet2 (CenterNet)*  | *anchor free*                         | single |
 | 13   | QueryInst         | 56.1   |                                                            | IN22K                            | SwinL               | *QueryInst* (DETR)        |                                       | single |
 | 14   | Scaled YOLOv4     | 55.8   |                                                            | IN1K                             | CSPDarkNet-53       | *scaled YOLOv4* (YOLOv4)  | *network scaling approach*            | single |
-| 15   | DetectoRS         | 55.7   |                                                            | IN5K                             | ResNeXt101          | *DetectoRS* (HTC)         |                                       | multi  |
+| 15   | DetectoRS         | 55.7   |                                                            | IN                               | ResNeXt101          | *DetectoRS* (HTC)         |                                       | multi  |
 | 16   | Mish              | 55.2   |                                                            | IN1K                             | CSPDarkNet-53       | YOLOv4                    | *activation function*                 | multi  |
 | 17   | Self-training     | 54.3   |                                                            | IN1K, OpenImages (self-training) | SpineNet-190        | RetinaNet                 | *self-training*                       | single |
 | 18   | UniverseNet       | 54.1   |                                                            | IN1K                             | Res2Net101-DCN      | *UniverseNet* (RetinaNet) |                                       | multi  |
 | 19   | EfficientDet      | 53.7   |                                                            | IN1K                             | EfficientNet        | *EfficientDet* (FPN)      |                                       | single |
-| 20   | PAA               | 53.5   |                                                            |                                  | ResNeXt-152-DCN     | *PAA* (RetinaNet)         | *anchor assignment*                   | multi  |
-| 21   | LSNet             | 53.5   |                                                            |                                  | Res2Net-101-DCN     | *LSNet*                   |                                       | multi  |
-| 22   | ResNeSt           | 53.3   |                                                            |                                  | *ResNeSt-200*       | Cascade-RCNN              |                                       | multi  |
+| 20   | PAA               | 53.5   |                                                            | IN                               | ResNeXt-152-DCN     | *PAA* (RetinaNet)         | *anchor assignment*                   | multi  |
+| 21   | LSNet             | 53.5   |                                                            | IN1K                             | Res2Net-101-DCN     | *LSNet* (FPN)             |                                       | multi  |
+| 22   | ResNeSt           | 53.3   |                                                            | IN1K                             | *ResNeSt-200*       | Cascade-RCNN              |                                       | multi  |
 | 23   | GFLv2             | 53.3   |                                                            |                                  | Res2Net-101-DCN     | *Generalized Focal Loss*  | *loss function*                       | multi  |
 | 24   | RelationNet++     | 52.7   |                                                            |                                  | ResNeXt-101-DCN     | *RelationNet++*           |                                       | multi  |
 | 25   | Deformable DETR   | 52.3   |                                                            | IN1K                             | ResNeXt-101-DCN     | *Deformable DETR* (DETR)  |                                       | multi  |
@@ -383,7 +383,18 @@ BiFPN：结合了NAS-FPN和PANet，保留了双向融合和跳级连接，变为
 
 
 
+### 21. LSNet
+
+<img src="readme.assets/image-20220329152618672.png" alt="image-20220329152618672" style="zoom:50%;" />
+
+将目标检测、实例分割、姿态估计三个任务统一。首先预测中心点，然后对三个任务分别预测四个极值点向量/N个轮廓点向量、13个关键点向量。设计了Cross IoU loss将IoU降低到一维进行计算，效果好于smooth L1 loss
+
+回归过程采取了init+refine的方式。先回归一组初始的向量，这些向量已经比较接近关键点。利用Pyramid DCN获取这些关键点处的特征，也就是说DCN不仅只在目标所在的FPN层计算，还会把DCN的offsets等比例映射至相邻的FPN层进行计算，将三层的所得特征相加，形成最终的关键点特征。利用这些特征再预测一组向量，两组向量叠加最终形成预测向量
 
 
 
+### 22. ResNest
 
+<img src="readme.assets/image-20220329155413607.png" alt="image-20220329155413607" style="zoom:50%;" />
+
+在SENet，SKNet，ResNeXt的基础上提出了Split-Attention模块，用于替换ResNet中四个stage的conv。在分类、检测、分割上都有非常明显的提升。Split-Attention即在每个分组内用attention
