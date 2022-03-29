@@ -44,17 +44,12 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 | 24   | RelationNet++     | 52.7   |                                                            |                                  | ResNeXt-101-DCN     | *RelationNet++*           |                                       | multi  |
 | 25   | Deformable DETR   | 52.3   |                                                            | IN1K                             | ResNeXt-101-DCN     | *Deformable DETR* (DETR)  |                                       | multi  |
 
-### Related Papers
+### Related Papers (unordered)
 
 * TODO
 
-1. ATSS
-2. FCOS
-3. Sparse RCNN
-4. SEPC
-5. Rethinking ImageNet Pre-Training
-6. SyncBN
-7. iBN
+1. SEPC
+2. Rethinking ImageNet Pre-Training
 
 * Done
 
@@ -83,6 +78,10 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 20. CSPNet
 20. NAS-FPN
 20. PANet
+20. ATSS
+27. FCOS
+28. RepPoints
+29. Sparse RCNN
 
 
 
