@@ -19,7 +19,7 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 | Rank | Method            | AP box | Extra Data (Detection)                                     | Pretrain Data                    | Backbone            | Detector                        | Training                              | Scale  |
 | ---- | ----------------- | ------ | ---------------------------------------------------------- | -------------------------------- | ------------------- | ------------------------------- | ------------------------------------- | ------ |
 | 1    | DINO              | 63.3   | Object365                                                  | IN22K                            | SwinL               | *DINO* (DETR)                   |                                       | multi  |
-| 2    | Swin v2           | 63.1   | Object365                                                  | IN22K-ext-70M                    | *SwinG*             | HTC++                           |                                       | multi  |
+| 2    | Swin v2           | 63.1   | Object365                                                  | IN22K-ext-70M                    | *SwinG*             | HTC++                           | *SimMIM*                              | multi  |
 | 3    | Florence          | 62.4   | FLOD9M (COCO, O365, LVIS, OpenImages), IN22K self-training | FLD900M                          | SwinH               | DyHead                          | *multimodal, multi-task*              | multi  |
 | 4    | GLIP              | 61.5   | FourODs, GoldG+                                            | 27M grounding data               | SwinL               | DyHead                          | *object-word contrastive pretraining* | multi  |
 | 5    | Soft Teacher      | 61.3   | Object365                                                  | IN22K                            | SwinL               | HTC++                           | *semi-supervised*                     | multi  |
@@ -44,11 +44,13 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 | 24   | RelationNet++     | 52.7   |                                                            | IN1K                             | ResNeXt-101-DCN     | *RelationNet++*                 |                                       | multi  |
 | 25   | Deformable DETR   | 52.3   |                                                            | IN1K                             | ResNeXt-101-DCN     | *Deformable DETR* (DETR)        |                                       | multi  |
 
+### Latest Papers (should appear on leaderboard)
+
+1. MAE 53.3
+2. DAT 53.0
+3. CAE 52.3
+
 ### Related Papers (unordered)
-
-* TODO
-
-* Done
 
 1. ResNet
 2. RCNN
