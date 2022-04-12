@@ -92,7 +92,7 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 
 ### 1. DINO
 
-<img src="coco%20leaderboard.assets/image-20220323160918699.png" alt="image-20220323160918699" style="zoom:50%;" />
+<img src="coco%20leaderboard.assets/image-20220323160918699.png" alt="image-20220323160918699" style="zoom: 33%;" />
 
 #### Method
 
@@ -100,19 +100,19 @@ References: several zhihu articles (see my [collection list](https://www.zhihu.c
 
 1. Contrastive De-Noising Training
 
-<img src="readme.assets/image-20220331152724604.png" alt="image-20220331152724604" style="zoom:50%;" />
+<img src="readme.assets/image-20220331152724604.png" alt="image-20220331152724604" style="zoom: 33%;" />
 
 在DN-DETR的基础上增加了对比学习，即正负样本同时添加噪声，对于每个anchor query需要完成降噪、判断有无物体。添加smaller noise的作为正样本，其他作为负样本，主要目的是改善box匹配，加速训练
 
 2. Mixed Query Selection
 
-<img src="readme.assets/image-20220331152742129.png" alt="image-20220331152742129" style="zoom:50%;" />
+<img src="readme.assets/image-20220331152742129.png" alt="image-20220331152742129" style="zoom: 33%;" />
 
 与之前工作把anchor和query都设成静态（DETR；query太多，计算量大且难以收敛）或都设成动态（Deformable DETR；可能有多个物体或只有物体的一部分）不同，把Content Queries设为静态（可学习），Anchor Boxes设为动态（由encoder初始化）
 
 3. Look Forward Twice
 
-<img src="readme.assets/image-20220331152751575.png" alt="image-20220331152751575" style="zoom:50%;" />
+<img src="readme.assets/image-20220331152751575.png" alt="image-20220331152751575" style="zoom: 33%;" />
 
 box refine时增加前一层的特征作为输入，类似于增大感受野
 
@@ -209,7 +209,7 @@ Swin v1的问题：
 
 ### 4. GLIP
 
-<img src="coco%20leaderboard.assets/image-20220323180325391.png" alt="image-20220323180325391" style="zoom:50%;" />
+<img src="coco%20leaderboard.assets/image-20220323180325391.png" alt="image-20220323180325391" style="zoom: 50%;" />
 
 #### Method
 
@@ -354,7 +354,7 @@ dynamic head模块可以添加到one-stage和two-stage检测器中，one-stage�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331163718357.png" alt="image-20220331163718357" style="zoom:50%;" />
+<img src="readme.assets/image-20220331163718357.png" alt="image-20220331163718357" style="zoom: 33%;" />
 
 | Contribution       | Improvement |
 | ------------------ | ----------- |
@@ -397,22 +397,42 @@ dynamic head模块可以添加到one-stage和two-stage检测器中，one-stage�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220412143350945.png" alt="image-20220412143350945" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220412143359279.png" alt="image-20220412143359279" style="zoom:50%;" />
+
+<img src="readme.assets/image-20220412143438382.png" alt="image-20220412143438382" style="zoom:50%;" />
+
+<img src="readme.assets/image-20220412143529597.png" alt="image-20220412143529597" style="zoom:50%;" />
+
+<img src="readme.assets/image-20220412143538054.png" alt="image-20220412143538054" style="zoom:50%;" />
+
+<img src="readme.assets/image-20220412143627400.png" alt="image-20220412143627400" style="zoom:50%;" />
 
 
 
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+
+
+
+
+| Contribution                       | Improvement          |
+| ---------------------------------- | -------------------- |
+| feature alignment                  | +0.1 (0.5 for S,M,L) |
+| prediction refinement              | +0                   |
+| implicit joint detection embedding | +0.3                 |
+| addition operator                  | +0.1(iFR),+0(iPA)    |
+| multiplication operator            | -0.4(iFR),+0.2(iPA)  |
+| concatenation                      | 0(iFR)               |
+| vector implicit knowledge          | +0.1                 |
+| neural network                     | +0                   |
+| matrix factorization               | +0.2                 |
+
+<img src="readme.assets/image-20220412143654601.png" alt="image-20220412143654601" style="zoom:50%;" />
+
+| Comparison with         | Improvement |
+| ----------------------- | ----------- |
+| YOLOv4-P6-light         | +1.1        |
+| implicit (un-finetuned) | +0.6        |
 
 
 
@@ -432,22 +452,18 @@ baseline模型在LVIS 2020挑战赛获胜者的基础上提升3.6%
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220412150353088.png" alt="image-20220412150353088" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution  | Improvement |
+| ------------- | ----------- |
+| self-training | +1.5        |
+| Copy-Paste    | +1.5        |
 
+<img src="readme.assets/image-20220412150317270.png" alt="image-20220412150317270" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement |
+| --------------- | ----------- |
+| Eff-B7 FPN      | +1.5        |
 
 
 
@@ -459,24 +475,22 @@ baseline模型在LVIS 2020挑战赛获胜者的基础上提升3.6%
 
 在DETR上增加预测mask的head。其中主要贡献是UQR模块，将mask从二维feature map压缩编码到一维向量，从而可以用head预测。测试时将一维向量解码为mask。编解码方式有Sparse Coding, PCA, DCT
 
+<img src="readme.assets/image-20220412151033449.png" alt="image-20220412151033449" style="zoom:50%;" />
+
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220412151211376.png" alt="image-20220412151211376" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution | Improvement |
+| ------------ | ----------- |
+| DCT          | +1.9        |
 
+<img src="readme.assets/image-20220412151224604.png" alt="image-20220412151224604" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with       | Improvement (ResNet-101) |
+| --------------------- | ------------------------ |
+| Deformable DETR       | +2.0                     |
+| Deformable DETR + SQR | +1.9                     |
 
 
 
@@ -485,6 +499,8 @@ baseline模型在LVIS 2020挑战赛获胜者的基础上提升3.6%
 <img src="readme.assets/image-20220328162837596.png" alt="image-20220328162837596" style="zoom:50%;" />
 
 #### Method
+
+<img src="readme.assets/image-20220412152523540.png" alt="image-20220412152523540" style="zoom:50%;" />
 
 one-stage检测器：依赖于单独分类和回归分支；类别很多时（如LVIS）速度不再比two-stage快
 
@@ -498,22 +514,20 @@ CenterNet2框架（概率两阶段模型）将一个强大的One-Stage Detector�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220412153040468.png" alt="image-20220412153040468" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution               | Improvement |
+| -------------------------- | ----------- |
+| second stage probabilities | -0.1        |
+| 4 layer first stage head   | +0.3        |
+| focal loss                 | +0.5        |
 
+<img src="readme.assets/image-20220412152704816.png" alt="image-20220412152704816" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with           | Improvement |
+| ------------------------- | ----------- |
+| CenterNet one-stage       | +2.7        |
+| CascadeRCNN-RPN two-stage | +1.3        |
 
 
 
