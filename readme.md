@@ -584,22 +584,16 @@ CenterNet2框架（概率两阶段模型）将一个强大的One-Stage Detector�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414002747866.png" alt="image-20220414002747866" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220414002756227.png" alt="image-20220414002756227" style="zoom:50%;" />
 
+<img src="readme.assets/image-20220414002738373.png" alt="image-20220414002738373" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement |
+| --------------- | ----------- |
+| YOLOv4          | +2.0        |
+| YOLOv3-SPP      | +6.7        |
 
 
 
@@ -615,22 +609,18 @@ CenterNet2框架（概率两阶段模型）将一个强大的One-Stage Detector�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+![image-20220414010123978](readme.assets/image-20220414010123978.png)
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution                  | Improvement |
+| ----------------------------- | ----------- |
+| Recursive Feature Pyramid     | +4.2        |
+| Switchable Atrous Convolution | +4.3        |
 
+<img src="readme.assets/image-20220414005837314.png" alt="image-20220414005837314" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement (ResNet-50) |
+| --------------- | ----------------------- |
+| HTC             | +7.7                    |
 
 
 
@@ -650,22 +640,14 @@ CenterNet2框架（概率两阶段模型）将一个强大的One-Stage Detector�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414010757575.png" alt="image-20220414010757575" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220414010741539.png" alt="image-20220414010741539" style="zoom:50%;" />
 
-
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Contribution   | Improvement |
+| -------------- | ----------- |
+| CSP-DarkNet-53 | +0.4        |
+| YOLOv4 pacsp-x | +0.9        |
 
 
 
@@ -701,22 +683,17 @@ self-training：能提升性能，但相对于预训练来说会花1.3x-8x的时
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414011137231.png" alt="image-20220414011137231" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220414011523436.png" alt="image-20220414011523436" style="zoom:50%;" />
 
+<img src="readme.assets/image-20220414011221190.png" alt="image-20220414011221190" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with            | Improvement |
+| -------------------------- | ----------- |
+| random init                | +0.8        |
+| ImageNet init (supervised) | +1.5        |
+| ImageNet init (SimCLR)     | +1.5        |
 
 
 
@@ -732,22 +709,23 @@ UniverseNet: 在RetinaNet基础上，使用ATSS, SEPC, DCN，多尺度训练，�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+![image-20220414015908360](readme.assets/image-20220414015908360.png)
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution         | Improvement |
+| -------------------- | ----------- |
+| SEPC                 | +1.7        |
+| Res2Net-v1b          | +2.8        |
+| DCN                  | +1.6        |
+| multi-scale training | +1.6        |
+| GFL                  | +0.8        |
+| SyncBN, iBN          | +1.7        |
 
+<img src="readme.assets/image-20220414015758265.png" alt="image-20220414015758265" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement |
+| --------------- | ----------- |
+| RetinaNet       | +12.2       |
+| RelationNet++   | +1.4        |
 
 
 
