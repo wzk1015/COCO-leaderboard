@@ -547,22 +547,24 @@ CenterNet2框架（概率两阶段模型）将一个强大的One-Stage Detector�
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220413135539353.png" alt="image-20220413135539353" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220413135547279.png" alt="image-20220413135547279" style="zoom:50%;" />
 
+| Contribution         | Improvement |
+| -------------------- | ----------- |
+| parallel supervision | +0.3        |
+| DynConv mask         | +0.3        |
+| shared MSA           | +0.5        |
+| shared query         | +0.7        |
 
+<img src="readme.assets/image-20220413135054728.png" alt="image-20220413135054728" style="zoom:50%;" />
 
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with    | Improvement (ResNet-101) |
+| ------------------ | ------------------------ |
+| Cascade Mask R-CNN | +1.9                     |
+| HTC                | +1.8                     |
+| Sparse R-CNN       | +1.8                     |
 
 
 
