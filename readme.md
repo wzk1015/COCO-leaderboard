@@ -741,22 +741,20 @@ BiFPN：结合了NAS-FPN和PANet，保留了双向融合和跳级连接，变为
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414151531969.png" alt="image-20220414151531969" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220414151518665.png" alt="image-20220414151518665" style="zoom:50%;" />
 
+| Contribution | Improvement |
+| ------------ | ----------- |
+| BiFPN        | +3.1        |
+| weighted     | +0.4        |
 
+<img src="readme.assets/image-20220414151542174.png" alt="image-20220414151542174" style="zoom:50%;" />
 
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with      | Improvement |
+| -------------------- | ----------- |
+| AMoebaNet+NAS-FPN+AA | +1.1        |
 
 
 
@@ -777,22 +775,21 @@ BiFPN：结合了NAS-FPN和PANet，保留了双向融合和跳级连接，变为
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414152733481.png" alt="image-20220414152733481" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution | Improvement |
+| ------------ | ----------- |
+| PAA          | +0.5        |
+| IoU pred     | +1.0        |
+| voting       | +0.2        |
 
+<img src="readme.assets/image-20220414152806078.png" alt="image-20220414152806078" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement |
+| --------------- | ----------- |
+| FCOS            | +3.4        |
+| MAL             | +0.7        |
+| ATSS            | +1.0        |
 
 
 
@@ -808,22 +805,21 @@ BiFPN：结合了NAS-FPN和PANet，保留了双向融合和跳级连接，变为
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414153311362.png" alt="image-20220414153311362" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution                   | Improvement |
+| ------------------------------ | ----------- |
+| Cross IoU                      | +0.5        |
+| Pyramid extreme point features | +1.9        |
 
+<img src="readme.assets/image-20220414153237074.png" alt="image-20220414153237074" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement (X101-64X4D-dcn) |
+| --------------- | ---------------------------- |
+| RepPointsV2     | -1.7                         |
+| BorderDet       | +0.1                         |
+| ATSS            | -0.3                         |
+| PAA             | -1.0                         |
 
 
 
@@ -837,22 +833,21 @@ BiFPN：结合了NAS-FPN和PANet，保留了双向融合和跳级连接，变为
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+![image-20220414153617349](readme.assets/image-20220414153617349.png)
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+| Contribution    | Improvement (ImageNet) |
+| --------------- | ---------------------- |
+| mixup           | +0.8                   |
+| autoaug         | +0.3                   |
+| ResNeSt-50-fast | +1.2                   |
+| ResNeSt-50      | +0.5                   |
 
+<img src="readme.assets/image-20220414153911370.png" alt="image-20220414153911370" style="zoom:50%;" />
 
-
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement (Cascade-RCNN) |
+| --------------- | -------------------------- |
+| ResNet50        | +5.0                       |
+| ResNet101       | +3.5                       |
 
 
 
@@ -868,22 +863,22 @@ GFL v2：利用bbox分数分布图的topK（刻画分布情况，如双峰等）
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414154252861.png" alt="image-20220414154252861" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220414154328212.png" alt="image-20220414154328212" style="zoom:50%;" />
 
+| Contribution            | Improvement |
+| ----------------------- | ----------- |
+| distribution statistics | +1.2        |
+| decompoed form          | +0.9        |
 
+<img src="readme.assets/image-20220414154428634.png" alt="image-20220414154428634" style="zoom:50%;" />
 
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement (R-101-DCN) |
+| --------------- | ----------------------- |
+| GFLv1           | +1.0                    |
+| PAA             | +0.9                    |
+| ATSS            | +2.0                    |
 
 
 
@@ -899,22 +894,25 @@ RelationNet：提出了基于注意力的BVR模块。物体表示方式中，中
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414155017810.png" alt="image-20220414155017810" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220414155044991.png" alt="image-20220414155044991" style="zoom:50%;" />
 
+<img src="readme.assets/image-20220414155141658.png" alt="image-20220414155141658" style="zoom:50%;" />
 
+| Contribution                       | Improvement |
+| ---------------------------------- | ----------- |
+| sub-pixel corner/centers           | +1.5        |
+| shared relative location embedding | +2.9        |
+| appearance term                    | +1.8        |
+| geometry term                      | +2.0        |
+| BVR() on RetineNet)                | +1.8        |
 
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+<img src="readme.assets/image-20220414155110860.png" alt="image-20220414155110860" style="zoom:50%;" />
+
+| Comparison with | Improvement |
+| --------------- | ----------- |
+| ATSS            | +2.0        |
 
 
 
@@ -934,20 +932,24 @@ two-stage：第一阶段用encoder only的Deformable DETR生成proposal，直接
 
 #### Experiment
 
-<img src="readme.assets/image-20220331151557171.png" alt="image-20220331151557171" style="zoom:50%;" />
+<img src="readme.assets/image-20220414155910645.png" alt="image-20220414155910645" style="zoom:50%;" />
 
-| Contribution                    | Improvement |
-| ------------------------------- | ----------- |
-| Mixed Query Selection           | +0.5        |
-| Look Forward Twice              | +0.4        |
-| Contrastive De-Noising Training | +0.5        |
+<img src="readme.assets/image-20220414155620835.png" alt="image-20220414155620835" style="zoom:50%;" />
 
+| Contribution              | Improvement        |
+| ------------------------- | ------------------ |
+| Deformable DETR           | +0.5 (less epochs) |
+| iterative bbox refinement | +1.6               |
+| two-stage                 | +0.8               |
+| BiFPN                     | +0.1               |
+| Multi-scale inputs        | +1.7               |
+| number of sampling points | +0.9               |
+| Multi-scale attention     | +1.5               |
 
+<img src="readme.assets/image-20220414155628530.png" alt="image-20220414155628530" style="zoom:50%;" />
 
-| Comparison with     | Improvement (ResNet-50) |
-| ------------------- | ----------------------- |
-| DETR DC5            | +7.7                    |
-| Dynamic DETR        | +3.8                    |
-| DAB-Deformable-DETR | +4.1                    |
-| DN-Deformable-DETR  | +2.4                    |
+| Comparison with | Improvement           |
+| --------------- | --------------------- |
+| DETR            | +2.9 (less epochs)    |
+| ATSS            | +1.6 (ResNeXt101+DCN) |
 
