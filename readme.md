@@ -97,7 +97,7 @@ DINO: DETR with Improved DeNoising Anchor Boxes for End-to-End Object Detection
 
 [论文](https://arxiv.org/abs/2203.03605v3)  [解读](https://zhuanlan.zhihu.com/p/478461226)
 
-<img src="coco%20leaderboard.assets/image-20220323160918699.png" alt="image-20220323160918699" style="zoom: 33%;" />
+<img src="readme.assets/image-20220323160918699.png" alt="image-20220323160918699" style="zoom: 33%;" />
 
 #### Method
 
@@ -150,7 +150,7 @@ Swin Transformer V2: Scaling Up Capacity and Resolution
 
 [论文](https://arxiv.org/abs/2111.09883v2)  [解读](https://mp.weixin.qq.com/s/R_dIyv7ain5FU7WS69Q_oA)
 
-<img src="coco%20leaderboard.assets/image-20220323163649806.png" alt="image-20220323163649806" style="zoom:50%;" />
+<img src="readme.assets/image-20220323163649806.png" alt="image-20220323163649806" style="zoom:50%;" />
 
 #### Method
 
@@ -195,7 +195,7 @@ Florence: A New Foundation Model for Computer Vision
 
 [论文](https://arxiv.org/abs/2111.11432v1)  [解读](https://zhuanlan.zhihu.com/p/437173593)
 
-<img src="coco%20leaderboard.assets/image-20220323173214714.png" alt="image-20220323173214714" style="zoom: 33%;" />
+<img src="readme.assets/image-20220323173214714.png" alt="image-20220323173214714" style="zoom: 33%;" />
 
 #### Method
 
@@ -224,7 +224,7 @@ Grounded Language-Image Pre-training
 
 [论文](https://arxiv.org/abs/2112.03857v1)  [解读](https://zhuanlan.zhihu.com/p/489600809)
 
-<img src="coco%20leaderboard.assets/image-20220323180325391.png" alt="image-20220323180325391" style="zoom: 50%;" />
+<img src="readme.assets/image-20220323180325391.png" alt="image-20220323180325391" style="zoom: 50%;" />
 
 #### Method
 
@@ -260,7 +260,7 @@ Grounded Language-Image Pre-training
 
 [论文](https://arxiv.org/abs/2106.09018v3)  [解读](https://zhuanlan.zhihu.com/p/437754834)
 
-<img src="coco%20leaderboard.assets/image-20220324130948314.png" alt="image-20220324130948314" style="zoom:50%;" />
+<img src="readme.assets/image-20220324130948314.png" alt="image-20220324130948314" style="zoom:50%;" />
 
 #### Method
 
